@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Secens/FirstScene.unity
+  isLoaded: 1
+  isActive: 1
