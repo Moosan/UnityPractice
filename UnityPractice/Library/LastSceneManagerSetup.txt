@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Secens/FirstScene.unity
+- path: Assets/Secens/mu-sanFolder/Mu-sanPractice.unity
   isLoaded: 1
   isActive: 1
