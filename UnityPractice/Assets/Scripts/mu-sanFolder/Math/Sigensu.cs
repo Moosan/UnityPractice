@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Sigensu:MonoBehaviour
 {
-    void Start()
+    public Vector3 Axis;
+    public float RotateSpeed;
+
+    protected void Update()
     {
-        var pos=new Vector3(2,1,5);
-        var axis=new Vector3(0,1,0);
-        var angle = 90.0f;
-        var newPos = makeRotatePosition(pos, axis, angle);
-        Debug.Log(newPos);
+        transform.position = makeRotatePosition(transform.position, Axis, RotateSpeed*Time.deltaTime);
     }
 
     static Quaternion makeRotateQuaternion(Vector3 axis,float angle)
@@ -27,12 +26,18 @@ public class Sigensu:MonoBehaviour
         return new Quaternion(pos.x,pos.y,pos.z,0);
     }
 
-    Vector3 makeRotatePosition(Vector3 originPos,Vector3 axis,float angle)
+    static Quaternion ConjugateQuaternion(Quaternion originQuaternion)
+    {
+        var q = originQuaternion;
+        return new Quaternion(-q.x,-q.y,-q.z,q.w);
+    }
+
+    static Vector3 makeRotatePosition(Vector3 originPos,Vector3 axis,float angle)
     {
         var rotateQuaternion = makeRotateQuaternion(axis, angle);
         var pos = posQuaternion(originPos);
-        var result=pos*rotateQuaternion;
-        Debug.Log(result.w);
+        var conjugate = ConjugateQuaternion(rotateQuaternion);
+        var result=rotateQuaternion*pos*conjugate;
         return new Vector3(result.x,result.y,result.z);
     }
 }
