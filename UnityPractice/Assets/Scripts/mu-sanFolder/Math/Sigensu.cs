@@ -6,9 +6,9 @@ public class Sigensu:MonoBehaviour
 {
     public Vector3 Axis;
     public float RotateSpeed;
-
     protected void Update()
     {
+        transform.rotation=Quaternion.Euler(new Vector3(0,10*RotateSpeed*Time.time,0));
         transform.position = makeRotatePosition(transform.position, Axis, RotateSpeed*Time.deltaTime);
     }
 
